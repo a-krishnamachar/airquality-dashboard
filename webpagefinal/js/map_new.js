@@ -22,7 +22,7 @@ MapChart.prototype.initVis = function() {
     });
 
   map.on('load', () => {
-    map.addSource('earthquakes', {
+    map.addSource('purpleair', {
       type: 'geojson',
       data: 'data/dataset_noTemp.geojson',
       cluster: true,
@@ -33,7 +33,7 @@ MapChart.prototype.initVis = function() {
     map.addLayer({
       id: 'clusters',
       type: 'circle',
-      source: 'earthquakes',
+      source: 'purpleair',
       filter: ['has', 'point_count'],
       paint: {
 // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
@@ -52,7 +52,7 @@ MapChart.prototype.initVis = function() {
       map.addLayer({
         id: 'cluster-count',
         type: 'symbol',
-        source: 'earthquakes',
+        source: 'purpleair',
         filter: ['has', 'point_count'],
         layout: {
           'text-field': '{point_count_abbreviated}',
@@ -63,20 +63,30 @@ MapChart.prototype.initVis = function() {
       map.addLayer({
         id: 'unclustered-point',
         type: 'circle',
-        source: 'earthquakes',
+        source: 'purpleair',
         filter: ['!', ['has', 'point_count']],
         paint: {
-          'circle-color': '#11b4da',
-          'circle-radius': 4,
+          'circle-color': 'red',
+          'circle-radius': 8,
           'circle-stroke-width': 1,
           'circle-stroke-color': '#fff'
         }
       });
+      // map.addLayer({
+      //   id: "unclustered-text",
+      //   type: "symbol",
+      //   source: "purpleair",
+      //   filter: ["has", "point_count"],
+      //   layout: {
+      //   "text-field": 'hello',
+      //   "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      //   "text-size": 12}
+      // }, 'unclustered-point');
 
       map.on('click', 'clusters', (e) => {
         const features = map.queryRenderedFeatures(e.point, {layers: ['clusters']});
         const clusterId = features[0].properties.cluster_id;
-        map.getSource('earthquakes').getClusterExpansionZoom(
+        map.getSource('purpleair').getClusterExpansionZoom(
           clusterId,
           (err, zoom) => {
             if (err) return;
@@ -95,9 +105,11 @@ MapChart.prototype.initVis = function() {
 // description HTML from its properties.
   map.on('click', 'unclustered-point', (e) => {
 const coordinates = e.features[0].geometry.coordinates.slice();
-const mag = e.features[0].properties.mag;
-const tsunami =
-e.features[0].properties.tsunami === 1 ? 'yes' : 'no';
+console.log(e.features[0].properties);
+var pmname = "pm_2.5";
+var pm_now = e.features[0].properties[pmname];
+var hourname = "1hour_avg";
+var houravg = e.features[0].properties[hourname];
 
 // Ensure that if the map is zoomed out such that
 // multiple copies of the feature are visible, the
@@ -109,7 +121,8 @@ e.features[0].properties.tsunami === 1 ? 'yes' : 'no';
   new mapboxgl.Popup()
   .setLngLat(coordinates)
   .setHTML(
-    `magnitude: ${mag}<br>Was there a tsunami?: ${tsunami}`
+    `Current: ${pm_now}<br>
+    1-Hour Average: ${houravg}`
   )
     .addTo(map);
   });
