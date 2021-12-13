@@ -94,7 +94,7 @@ RadialChart.prototype.initVis = function() {
               + "<br/>" + "1-day avg: " + i['1day_avg']
               + "<br/>" + "Coordinates: " + i['lat'] + ", " + i['lon']
               + "<br/> -------------"
-              + "<br/> CLICK to copy coordinates!");
+              + "<br/> CLICK to copy coordinates and jump to map!");
         })
         .on("mouseout", function(d,i) {
           d3.select(this)

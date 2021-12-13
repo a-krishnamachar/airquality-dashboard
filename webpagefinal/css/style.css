@@ -25,11 +25,25 @@ body {
 h3 {
   font-family: 'Georgia', serif;
 }
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+.col-4 {
+	flex: 0 0 33.3%;
+}
+.col-8 {
+	flex: 0 0 66.7%;
+}
+.w-100 {
+	width: 80%!important;
+}
 
 #jumpsection {
-	float: right;
 	position: sticky;
-	top: 10;
+	float: left;
+	top: 0;
+	/*left: 20px;*/
 	padding: 5px;
 	text-align: center;
 	border: 1px solid white;
@@ -74,8 +88,8 @@ h3 {
 div#worldwidetooltip {
 	position: relative;
 	text-align: center;
-	width: 200px;
-	height: 42px;
+	width: 300px;
+	height: 90px;
 	left: 300px;
 	padding: 2px;
 	bottom: 200px;
@@ -88,8 +102,8 @@ div#worldwidetooltip {
 div#domestictooltip {
 	position: relative;
 	text-align: center;
-	width: 200px;
-	height: 42px;
+	width: 300px;
+	height: 90px;
 	bottom: 200px;
 	left: 300px;
 	padding: 2px;

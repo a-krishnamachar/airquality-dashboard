@@ -56,7 +56,9 @@ var height, width;
       $(document).ready(function(){
         $('[data-toggle="tooltip"]').tooltip();
       });
-
+      // $(document).ready(function(){
+      //     $("#myModal").modal('show');
+      // });
 
 
     }

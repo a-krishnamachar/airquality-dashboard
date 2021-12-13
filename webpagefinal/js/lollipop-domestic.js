@@ -87,7 +87,13 @@ console.log(vis.locationData.columns[2]);
         .attr("fill", function(d) {
           return colorScale(d['1hour_avg']);
         })
-
+        .on('click', function(d,i) {
+          //go to map area
+          //copy coordinates
+          var copyText = i['lat'] + ", " + i['lon'];
+          navigator.clipboard.writeText(copyText)
+          window.location.href="#map-overall-area"
+        })
         .on("mouseover", function(d, i) {
           d3.select(this)
             .attr("fill", "black")
@@ -96,7 +102,11 @@ console.log(vis.locationData.columns[2]);
             .style("opacity", 0.8);
           lollipopdomesticpopup
             .html("AQI right now: " + i['pm_2.5']
-            + "<br/>" + "AQI 1-hr avg: " + i['1hour_avg']);
+            + "<br/>" + "AQI 1-hr avg: " + i['1hour_avg']
+            + "<br/>" + "Coordinates: " + i['lat'] + ", " + i['lon']
+            + "<br/> -------------"
+            + "<br/> Click to copy sensor coordinates");
+
         })
         .on("mouseout", function(d,i) {
           d3.select(this)
