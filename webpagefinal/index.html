@@ -9,23 +9,25 @@
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
     </head>
     <body>
-
-        <h1><center>Air Quality Dashboard</center></h1>
-        <br>
-        <p>Jump to a section: <br>
+      <div id=jumpsection>
+        Jump to a section: <br>
           <a id="jumpto-map" href="#map-title">Map</a> |
-          <a id="jumpto-lollipop" href="#lollipop-title">Worst Current AQI</a> |
-          <a id="jumpto-radial" href="#radial-chart">Highest Sustained Risk</a>
-        </p>
+          <a id="jumpto-lollipop" href="#lollipop-title">Hot Spots</a> |
+          <a id="jumpto-radial" href="#radial-chart">Sustained Risk</a>
+      </div>
+        <br><br>
+        <h1><center>Air Quality Dashboard</center></h1>
 
-        <h2 id="map-title"><center>Air Quality Indices (AQI)</center></h2>
+
+
+        <h2 id="map-title"><center>Air Quality Map</center></h2>
         <p>An interactive map displaying air quality indices across the world. Click and drag!</p>
 
       <div id="map-area"></div>
 
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
           <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+          <br><br>
 
       <h2 id="lollipop-title"><center>"Hot Spots"</center></h2>
 

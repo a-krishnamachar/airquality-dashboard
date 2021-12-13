@@ -9,6 +9,22 @@ h3 {
   font-family: 'Georgia', serif;
 }
 
+#jumpsection {
+	float: left;
+	position: sticky;
+	top: 0;
+	padding: 5px;
+	text-align: center;
+	border: 1px solid white;
+	background-color: #7084e6;
+	opacity: 0.5;
+}
+#jumpsection:hover {
+	background-color: #7084e6;
+	opacity: 1;
+}
+
+
 .float-container {
 	width: 100%;
 }
