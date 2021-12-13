@@ -17,13 +17,15 @@ RadialChart.prototype.initVis = function() {
   var vis = this;
 
   var margin = {top: 100, right: 0, bottom: 0, left: 0},
-    width = 800 - margin.left - margin.right,
-    height = 800 - margin.top - margin.bottom,
+    width = 700 - margin.left - margin.right,
+    height = 700 - margin.top - margin.bottom,
     innerRadius = 90,
     outerRadius = Math.min(width, height)/2;
 
+
+
   var svg = d3.select("#radial-chart").append("svg")
-    .attr("viewBox", '0 0 1000 1000')
+    .attr("viewBox", '0 0 800 800')
 
   // var svg = d3.select("#radial-chart").append("svg")
   //     .attr("width", width + margin.left + margin.right)
@@ -46,7 +48,10 @@ RadialChart.prototype.initVis = function() {
     .domain([0,vis.locationData[0]['1hour_avg']])
     .range(["#a9cbdb", "#032738"])
 
-
+    var radialpopup = d3.select("#radial-chart").append("div")
+      .attr("id", "radialtooltip")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
 
   //add bars to chart
   svg.append("g")
@@ -71,11 +76,29 @@ RadialChart.prototype.initVis = function() {
             return x(d['name']) + x.bandwidth();
           })
           .padAngle(0.02)
-          .padRadius(innerRadius));
-        // .on('mouseover', function(d) {
-        //       .transition().duration(100)
-        //       .attr('text', 'hello');
-        //   });
+          .padRadius(innerRadius))
+        .on('mouseover', function(d,i) {
+          console.log('hello')
+          d3.select(this)
+            .attr("fill", "white")
+          radialpopup.transition()
+              .duration(150)
+              .style("opacity", 0.8);
+          radialpopup
+              .html("7-day average AQI: " + i['1week_avg']
+              + "<br/>" + "1-day avg: " + i['1day_avg']
+              + "<br/>" + "Coordinates: " + i['lat'] + ", " + i['lon']);
+        })
+        .on("mouseout", function(d,i) {
+          d3.select(this)
+          .attr("fill", function(i) {
+            return colorScale(i['1week_avg']);
+          })
+          radialpopup.transition().duration(500)
+            .style("opacity", 0);
+        });
+
+
 
 
     //location names

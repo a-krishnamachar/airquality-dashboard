@@ -52,15 +52,51 @@ h3 {
 	padding-left: 150px;
 }
 
-#lollipop-area-2.tooltip {
-	position: absolute;
+#radialtool {
+	top: 50px;
+}
+
+div#worldwidetooltip {
+	position: relative;
 	text-align: center;
-	width: 60px;
-	height: 30px;
+	width: 200px;
+	height: 42px;
+	left: 300px;
 	padding: 2px;
-	font: 12px;
+	bottom: 200px;
+	font: 16px;
 	background: white;
 	color: black;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+div#domestictooltip {
+	position: relative;
+	text-align: center;
+	width: 200px;
+	height: 42px;
+	bottom: 200px;
+	left: 300px;
+	padding: 2px;
+	font: 16px;
+	background: white;
+	color: black;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+div#radialtooltip {
+	position: relative;
+	text-align: center;
+	width: 200px;
+	height: 60px;
+	left: 300px;
+	padding: 2px;
+	bottom: 200px;
+	font: 16px;
+	background: white;
+	color: black;
+	border: 1px solid black;
 	border-radius: 5px;
 }
 

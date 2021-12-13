@@ -19,8 +19,11 @@ LollipopDomesticChart.prototype.initVis = function() {
     width = 500 - margin.left - margin.right,
     height = 900 - margin.top - margin.bottom;
 
+
+
   var svg = d3.select("#lollipop-area-2").append("svg")
     .attr("viewBox", '0 0 600 900')
+
 
 // var svg = d3.select("#lollipop-area-2").append("svg")
 //     .attr("width", width + margin.left + margin.right)
@@ -53,16 +56,12 @@ console.log(vis.locationData.columns[2]);
       .domain([vis.locationData[49]['1hour_avg'],vis.locationData[0]['1hour_avg']])
       .range(["#a9cbdb", "#032738"])
 
-  svg.append("text")
-		.attr("id", "tooltip")
-    .style("opacity" , 0);
-		// .attr("x", 10)
-		// .attr("y", 20);
+      var lollipopdomesticpopup = d3.select("#lollipop-area-2").append("div")
+        .attr("class", "tooltip")
+        .attr("id", "domestictooltip")
+        .style("opacity", 0);
 
 
-  var lollipopdomesticpopup = d3.select("#lollipop-area-2").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
 
     svg.selectAll("myline")
       .data(vis.locationData)
@@ -90,6 +89,8 @@ console.log(vis.locationData.columns[2]);
         })
 
         .on("mouseover", function(d, i) {
+          d3.select(this)
+            .attr("fill", "black")
           lollipopdomesticpopup.transition()
             .duration(150)
             .style("opacity", 0.8);
@@ -97,7 +98,11 @@ console.log(vis.locationData.columns[2]);
             .html("AQI right now: " + i['pm_2.5']
             + "<br/>" + "AQI 1-hr avg: " + i['1hour_avg']);
         })
-        .on("mouseout", function(d) {
+        .on("mouseout", function(d,i) {
+          d3.select(this)
+            .attr("fill", function(d,i) {
+              return colorScale(d['1hour_avg']);
+            })
           lollipopdomesticpopup.transition().duration(500)
             .style("opacity", 0);
         })

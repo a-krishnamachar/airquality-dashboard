@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
+
     </head>
     <body onload="document.body.style.opacity='1'">
       <a name="top"></a>
@@ -62,7 +64,7 @@
 
 
       <h2 id="lollipop-title"><center>"Hot Spots" | Current Highest PM2.5</center></h2>
-      <a style="padding: 10px;" href="#" data-toggle="tooltip" data-placement="right"
+      <a id="radialtool" style="padding: 10px;" href="#" data-toggle="tooltip" data-placement="right"
         title="This section displays the highest PM2.5 concentrations both worldwide (left)
         and in the domestic US (right). Hover over the dots for more information.">About this section</a>
 
@@ -70,15 +72,11 @@
 
         <div class="float-child">
           <h3>Worldwide</h3>
-          <button onclick="updateData('1hour_avg')">All Data</button>
-          <button onclick="updateData('pm_2.5')">current2.5</button>
           <div id="lollipop-area"></div>
         </div>
 
         <div class="float-child">
           <h3>Domestic (US)</h3>
-          <button onclick="updateData('1hour_avg')">All Data</button>
-          <button onclick="updateData('pm_2.5')">Umm</button>
           <div id="lollipop-area-2"></div>
         </div>
 
@@ -100,6 +98,8 @@
 
         <script src="https://d3js.org/d3.v6.js"></script>
         <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+        <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+
 
         <!-- <script src="js/jquery.min.js"></script> -->
       	<script src="js/popper.min.js"></script>

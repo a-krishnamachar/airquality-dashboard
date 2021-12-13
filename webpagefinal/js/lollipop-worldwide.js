@@ -55,6 +55,7 @@ console.log(vis.worldData.columns[2]);
 
       var lollipopdomesticpopup = d3.select("#lollipop-area").append("div")
         .attr("class", "tooltip")
+        .attr("id", "worldwidetooltip")
         .style("opacity", 0);
 
     svg.selectAll("myline")
@@ -81,6 +82,8 @@ console.log(vis.worldData.columns[2]);
           return colorScale(d['1hour_avg']);
         })
         .on("mouseover", function(d, i) {
+          d3.select(this)
+            .attr("fill", "black")
           lollipopdomesticpopup.transition()
             .duration(150)
             .style("opacity", 0.8);
@@ -89,6 +92,10 @@ console.log(vis.worldData.columns[2]);
             + "<br/>" + "AQI 1-hr avg: " + i['1hour_avg']);
         })
         .on("mouseout", function(d) {
+          d3.select(this)
+            .attr("fill", function(d,i) {
+              return colorScale(d['1hour_avg']);
+            })
           lollipopdomesticpopup.transition().duration(500)
             .style("opacity", 0);
         })

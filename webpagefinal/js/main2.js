@@ -10,7 +10,7 @@ var height, width;
     loadData();
     function loadData() {
         d3.json("data/dataset_with10min.geojson").then(function(jsonData) {
-          d3.csv("data/worstcurrentaqi.csv").then(function(mapData) {
+          d3.csv("data/worstcurrentaqi50.csv").then(function(mapData) {
             d3.csv("data/lastweekworst100.csv").then(function(radData) {
               d3.csv("data/weeklyUSworst100.csv").then(function(usweeklyData) {
                 d3.csv("data/currentUSworst50.csv").then(function(uscurrentData) {
