@@ -95,7 +95,7 @@ RadialChart.prototype.initVis = function() {
 
 }
 
-LollipopChart.prototype.updateVis = function() {
+RadialChart.prototype.updateVis = function() {
   var vis = this;
 
 }

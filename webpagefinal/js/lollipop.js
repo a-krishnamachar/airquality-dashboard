@@ -25,63 +25,119 @@ LollipopChart.prototype.initVis = function() {
   // var svg = d3.select("#lollipop-area").append("svg")
   //     .attr("width", width + margin.left + margin.right)
   //     .attr("height", height + margin.top + margin.bottom)
-
-      .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   var x = d3.scaleLinear()
-    .domain([0, vis.locationData[0]['1hour_avg'] + 20])
+    // .domain([0, vis.locationData[0]['1hour_avg'] + 20])
     .range([ 0, width]);
 
-  svg.append("g")
+  var xaxis = svg.append("g")
     .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x))
-    .selectAll("text")
-      .attr("transform", "translate(-10,0)rotate(-45)")
-      .style("text-anchor", "end");
 
-console.log(vis.locationData);
+    // .call(d3.axisBottom(x))
+    // .selectAll("text")
+    //   .attr("transform", "translate(-10,0)rotate(-45)")
+    //   .style("text-anchor", "end");
+
+  console.log(vis.locationData);
 
   var y = d3.scaleBand()
-    .range([0, height])
-    .padding(1)
-    //update to pull in correct json data. for this we want only the top 50 AQIers.
-    .domain(vis.locationData.map(function(d) { return d['name']; }));
+    .range([0, height]);
+    // .padding(1)
+    // //update to pull in correct json data. for this we want only the top 50 AQIers.
+    // .domain(vis.locationData.map(function(d) { return d['name']; }));
+  var yaxis = svg.append("g")
+    .attr("class", "thisyaxis")
+    // .call(d3.axisLeft(y))
 
     var colorScale = d3.scaleLinear()
       .domain([vis.locationData[49]['1hour_avg'],vis.locationData[0]['1hour_avg']])
       .range(["#a9cbdb", "#032738"])
 
 
-  svg.append("g")
-    .call(d3.axisLeft(y))
+    //update function UGH
+    function updateData(parameter) {
 
-    svg.selectAll("myline")
-      .data(vis.locationData)
-      .enter()
-      .append("line")
-        .attr("x1", x(0))
-        //.attr("x1", function(d) { return x(d['1hour_avg']); })
-        .attr("x2", x(0))
+      console.log(parameter);
+      x.domain([0, d3.max(vis.locationData, function(d) {
+        return d[parameter]
+      }) ]);
+
+      xaxis.transition()
+        .duration(1000)
+        .call(d3.axisBottom(x))
+
+      y.domain(vis.locationData.map(function(d) { return d['name']; }))
+      yaxis.transition().duration(1000).call(d3.axisLeft(y));
+
+      const l = svg.selectAll(".myLine")
+        .data(vis.locationData)
+      l
+
+        .enter()
+        .append("line")
+        .attr("class", "myLine")
+        .merge(l)
+        .transition().duration(1000)
+        // .attr("x1", x(0))
+        .attr("x1", function(d) {
+          return x(d[parameter]);
+        })
+        .attr("x2", function(d) { return x(d[parameter]); })
         .attr("y1", function(d) { return y(d['name']); })
         .attr("y2", function(d) { return y(d['name']); })
         .attr("stroke", "grey")
 
+      const u = svg.selectAll("circle")
+        .data(vis.locationData)
+      u
+        .enter()
+        .append("circle")
+        .merge(u)
+       .transition()
+       .duration(1000)
+       .attr("cx", function(d) {
+          // console.log(x(d[parameter]));
+          return x(d[parameter]); })
+       .attr("cy", function(d) { return y(d['name']); })
+       .attr("r", 8)
+       .attr("stroke", "black")
+       .attr("fill", function(d) {
+           return colorScale(d['1hour_avg']);
+       });
 
-    svg.selectAll("mycircle")
-      .data(vis.locationData)
-      .enter()
-      .append("circle")
-        .attr("cx", x(0))
-        // .attr("cx", function(d) { return x(d['1hour_avg']); })
-        .attr("cy", function(d) { return y(d['name']); })
-        .attr("r", "4")
-        // .style("fill", "#69b3a2")
-        .attr("fill", function(d) {
-          return colorScale(d['1hour_avg']);
-        })
-        .attr("stroke", "black");
+    }
 
+    updateData('1hour_avg')
+    //
+    //
+    // svg.selectAll("myline")
+    //   .data(vis.locationData)
+    //   .enter()
+    //   .append("line")
+    //     .attr("x1", x(0))
+    //     //.attr("x1", function(d) { return x(d['1hour_avg']); })
+    //     .attr("x2", x(0))
+    //     .attr("y1", function(d) { return y(d['name']); })
+    //     .attr("y2", function(d) { return y(d['name']); })
+    //     .attr("stroke", "grey")
+    //
+    //
+    // svg.selectAll("mycircle")
+    //   .data(vis.locationData)
+    //   .enter()
+    //   .append("circle")
+    //     .attr("cx", x(0))
+    //     // .attr("cx", function(d) { return x(d['1hour_avg']); })
+    //     .attr("cy", function(d) { return y(d['name']); })
+    //     .attr("r", "4")
+    //     // .style("fill", "#69b3a2")
+    //     .attr("fill", function(d) {
+    //       return colorScale(d['1hour_avg']);
+    //     })
+    //     .attr("stroke", "black");
+    //
       // Change the X coordinates of line and circle
     svg.selectAll("circle")
       .transition()

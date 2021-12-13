@@ -52,6 +52,18 @@ h3 {
 	padding-left: 150px;
 }
 
+#lollipop-area-2.tooltip {
+	position: absolute;
+	text-align: center;
+	width: 60px;
+	height: 30px;
+	padding: 2px;
+	font: 12px;
+	background: white;
+	color: black;
+	border-radius: 5px;
+}
+
 footer {
 	float: right;
 }

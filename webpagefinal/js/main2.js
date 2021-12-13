@@ -2,6 +2,7 @@ mapboxgl.accessToken = "pk.eyJ1IjoiYWtyaXNobmFtYWNoYXIiLCJhIjoiY2t0N2RvemZzMHJia
 
 var map;
 var lollipop;
+var lollipop_worldwide;
 var lollipop_domestic;
 var radial;
 var height, width;
@@ -12,7 +13,7 @@ var height, width;
           d3.csv("data/worstcurrentaqi.csv").then(function(mapData) {
             d3.csv("data/lastweekworst100.csv").then(function(radData) {
               d3.csv("data/weeklyUSworst100.csv").then(function(usweeklyData) {
-                d3.csv("data/currentUSworst100.csv").then(function(uscurrentData) {
+                d3.csv("data/currentUSworst50.csv").then(function(uscurrentData) {
 
           //airdata is for the map!! geojson
           airData = jsonData;
@@ -35,7 +36,7 @@ var height, width;
 
     function visAreas(visData, airData) {
       map = new MapChart("map-area",visData, airData);
-      lollipop = new LollipopChart("lollipop-area", visData, airData);
+      lollipop_worldwide = new LollipopWorldwideChart("lollipop-area", visData, airData);
       // lollipop_domestic = new LollipopDomesticChart("lollipop-area-2", visData, airData);
       //radial = new RadialChart("radial-chart", visData, airData);
 

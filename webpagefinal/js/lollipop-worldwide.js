@@ -1,15 +1,15 @@
 
-function LollipopDomesticChart (_parentElement, _data, _uscurrentData) {
+function LollipopWorldwideChart (_parentElement, _data, _worldwidedata) {
   this.parentElement = _parentElement;
   this.worldData = _data;
-  this.locationData = _uscurrentData;
+  this.locationData = _worldwidedata;
   //this.data = vis.data;
-  //console.log(this.data);
+  console.log(this.worldData);
 
   this.initVis();
 }
 
-LollipopDomesticChart.prototype.initVis = function() {
+LollipopWorldwideChart.prototype.initVis = function() {
   var lollipop;
 
   mapboxgl.accessToken = "pk.eyJ1IjoiYWtyaXNobmFtYWNoYXIiLCJhIjoiY2t0N2RvemZzMHJiajJ2bzAzZjZ2amc2MyJ9.J6Yl9EbxdWKCi9dnnX70GA";
@@ -19,7 +19,7 @@ LollipopDomesticChart.prototype.initVis = function() {
     width = 500 - margin.left - margin.right,
     height = 900 - margin.top - margin.bottom;
 
-  var svg = d3.select("#lollipop-area-2").append("svg")
+  var svg = d3.select("#lollipop-area").append("svg")
     .attr("viewBox", '0 0 600 900')
 
 // var svg = d3.select("#lollipop-area-2").append("svg")
@@ -30,7 +30,7 @@ LollipopDomesticChart.prototype.initVis = function() {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   var x = d3.scaleLinear()
-    .domain([0, vis.locationData[0]['1hour_avg'] + 20])
+    .domain([0, vis.worldData[0]['1hour_avg'] + 20])
     .range([ 0, width]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
@@ -39,33 +39,26 @@ LollipopDomesticChart.prototype.initVis = function() {
         .attr("transform", "translate(-10,0)rotate(-45)")
         .style("text-anchor", "end");
 
-console.log(vis.locationData.columns[2]);
+console.log(vis.worldData.columns[2]);
 
   var y = d3.scaleBand()
     .range([0, height])
-    .domain(vis.locationData.map(function(d) { return d['name']; }))
+    .domain(vis.worldData.map(function(d) { return d['name']; }))
     .padding(1);
     //update to pull in correct json data. for this we want only the top 50 AQIers.
   svg.append("g")
       .call(d3.axisLeft(y))
 
     var colorScale = d3.scaleLinear()
-      .domain([vis.locationData[49]['1hour_avg'],vis.locationData[0]['1hour_avg']])
+      .domain([vis.worldData[49]['1hour_avg'],vis.worldData[0]['1hour_avg']])
       .range(["#a9cbdb", "#032738"])
 
-  svg.append("text")
-		.attr("id", "tooltip")
-    .style("opacity" , 0);
-		// .attr("x", 10)
-		// .attr("y", 20);
-
-
-  var lollipopdomesticpopup = d3.select("#lollipop-area-2").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
+      var lollipopdomesticpopup = d3.select("#lollipop-area").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
     svg.selectAll("myline")
-      .data(vis.locationData)
+      .data(vis.worldData)
       .enter()
       .append("line")
         .attr("x1", x(0))
@@ -76,9 +69,8 @@ console.log(vis.locationData.columns[2]);
         .attr("stroke", "grey")
 
 
-
     svg.selectAll("mycircle")
-      .data(vis.locationData)
+      .data(vis.worldData)
       .enter()
       .append("circle")
         .attr("cx", x(0))
@@ -88,7 +80,6 @@ console.log(vis.locationData.columns[2]);
         .attr("fill", function(d) {
           return colorScale(d['1hour_avg']);
         })
-
         .on("mouseover", function(d, i) {
           lollipopdomesticpopup.transition()
             .duration(150)
@@ -101,18 +92,6 @@ console.log(vis.locationData.columns[2]);
           lollipopdomesticpopup.transition().duration(500)
             .style("opacity", 0);
         })
-        //
-        // .on('mouseover', function (d,i) {
-        //   console.log("im here")
-        //   svg.selectAll("#tooltip")
-        //   .style("opacity", "1")
-        //   .text(d['pm_2.5']);
-        // })
-        // .on('mouseout', function() {
-        //   svg.select("#tooltip")
-        //     .style("opacity", "0");
-        // })
-
         .attr("stroke", "black");
 
     //transitions
@@ -133,7 +112,7 @@ console.log(vis.locationData.columns[2]);
 
 }
 
-LollipopDomesticChart.prototype.updateVis = function() {
+LollipopWorldwideChart.prototype.updateVis = function() {
   var vis = this;
 
 }
