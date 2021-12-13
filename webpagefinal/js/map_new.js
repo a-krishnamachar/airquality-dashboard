@@ -72,16 +72,16 @@ MapChart.prototype.initVis = function() {
           'circle-stroke-color': '#fff'
         }
       });
-      // map.addLayer({
-      //   id: "unclustered-text",
-      //   type: "symbol",
-      //   source: "purpleair",
-      //   filter: ["has", "point_count"],
-      //   layout: {
-      //   "text-field": 'hello',
-      //   "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
-      //   "text-size": 12}
-      // }, 'unclustered-point');
+      map.addLayer({
+        id: "unclustered-text",
+        type: "symbol",
+        source: "purpleair",
+        filter: ["has", "point_count"],
+        layout: {
+        // "text-field": 'hello',
+        "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+        "text-size": 12}
+      }, 'unclustered-point');
 
       map.on('click', 'clusters', (e) => {
         const features = map.queryRenderedFeatures(e.point, {layers: ['clusters']});
@@ -110,6 +110,7 @@ var pmname = "pm_2.5";
 var pm_now = e.features[0].properties[pmname];
 var hourname = "1hour_avg";
 var houravg = e.features[0].properties[hourname];
+var locationname = e.features[0].properties['name'];
 
 // Ensure that if the map is zoomed out such that
 // multiple copies of the feature are visible, the
@@ -121,7 +122,8 @@ var houravg = e.features[0].properties[hourname];
   new mapboxgl.Popup()
   .setLngLat(coordinates)
   .setHTML(
-    `Current: ${pm_now}<br>
+    `${locationname}<br>
+    Current: ${pm_now}<br>
     1-Hour Average: ${houravg}`
   )
     .addTo(map);

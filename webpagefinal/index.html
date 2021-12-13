@@ -13,29 +13,44 @@
         <h1><center>Air Quality Dashboard</center></h1>
         <br>
         <p>Jump to a section: <br>
-          <a id="jumpto-map" href="#map-area">Map</a> |
-          <a id="jumpto-lollipop" href="#lollipop-area">Worst Current AQI</a> |
-          <a id="jumpto-map" href="#chart-area-2">Highest Sustained Risk</a>
+          <a id="jumpto-map" href="#map-title">Map</a> |
+          <a id="jumpto-lollipop" href="#lollipop-title">Worst Current AQI</a> |
+          <a id="jumpto-radial" href="#radial-chart">Highest Sustained Risk</a>
         </p>
 
-        <h2><center>Air Quality Indices (AQI)</center></h2>
+        <h2 id="map-title"><center>Air Quality Indices (AQI)</center></h2>
         <p>An interactive map displaying air quality indices across the world. Click and drag!</p>
 
-        <div id="map-area"></div>
+      <div id="map-area"></div>
 
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
           <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-          <br><br><br><br>
-        <h3>"Hot Spots" - Worst Air Quality *Right Now*</h3>
 
-        <div id="lollipop-area"></div>
-        <br>
 
-        <h3>Worst AQI - Past 7 Days</h3>
+      <h2 id="lollipop-title"><center>"Hot Spots"</center></h2>
 
-        <div id="chart-area-2"></div>
+      <div id="lollipop-overall" class="float-container">
 
-        <br>
+        <div class="float-child">
+          <h3>Worldwide</h3>
+          <div id="lollipop-area"></div>
+        </div>
+
+        <div class="float-child">
+          <h3>Domestic (US)</h3>
+          <div id="lollipop-area-2"></div>
+        </div>
+
+      </div>
+
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+      <div id="radial-chart">
+
+        <h2 id="radial-title"><center>Worst AQI - Past 7 Days</center></h2>
+      </div>
+
 
         <script src="https://d3js.org/d3.v6.js"></script>
         <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
@@ -48,6 +63,10 @@
         <script src="js/main2.js"></script>
         <script src="js/map_new.js"></script>
         <script src="js/lollipop.js"></script>
+        <script src="js/lollipop-domestic.js"></script>
+        <script src="js/radial.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3-scale-radial.js"></script>
 
 
     </body>

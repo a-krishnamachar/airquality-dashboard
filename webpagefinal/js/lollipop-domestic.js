@@ -1,5 +1,5 @@
 
-function LollipopChart (_parentElement, _data, _airData) {
+function LollipopDomesticChart (_parentElement, _data, _airData) {
   this.parentElement = _parentElement;
   this.locationData = _data;
   this.airData = _airData;
@@ -9,7 +9,7 @@ function LollipopChart (_parentElement, _data, _airData) {
   this.initVis();
 }
 
-LollipopChart.prototype.initVis = function() {
+LollipopDomesticChart.prototype.initVis = function() {
   var lollipop;
 
   mapboxgl.accessToken = "pk.eyJ1IjoiYWtyaXNobmFtYWNoYXIiLCJhIjoiY2t0N2RvemZzMHJiajJ2bzAzZjZ2amc2MyJ9.J6Yl9EbxdWKCi9dnnX70GA";
@@ -19,12 +19,12 @@ LollipopChart.prototype.initVis = function() {
     width = 500 - margin.left - margin.right,
     height = 700 - margin.top - margin.bottom;
 
-  var svg = d3.select("#lollipop-area").append("svg")
+  var svg = d3.select("#lollipop-area-2").append("svg")
     .attr("viewBox", '0 0 700 685')
 
-  // var svg = d3.select("#lollipop-area").append("svg")
-  //     .attr("width", width + margin.left + margin.right)
-  //     .attr("height", height + margin.top + margin.bottom)
+// var svg = d3.select("#lollipop-area-2").append("svg")
+//     .attr("width", width + margin.left + margin.right)
+//     .attr("height", height + margin.top + margin.bottom)
 
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -32,29 +32,27 @@ LollipopChart.prototype.initVis = function() {
   var x = d3.scaleLinear()
     .domain([0, vis.locationData[0]['1hour_avg'] + 20])
     .range([ 0, width]);
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x))
+      .selectAll("text")
+        .attr("transform", "translate(-10,0)rotate(-45)")
+        .style("text-anchor", "end");
 
-  svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x))
-    .selectAll("text")
-      .attr("transform", "translate(-10,0)rotate(-45)")
-      .style("text-anchor", "end");
-
-console.log(vis.locationData);
+console.log(vis.locationData.columns[2]);
 
   var y = d3.scaleBand()
     .range([0, height])
-    .padding(1)
+    .domain(vis.locationData.map(function(d) { return d['name']; }))
+    .padding(1);
     //update to pull in correct json data. for this we want only the top 50 AQIers.
-    .domain(vis.locationData.map(function(d) { return d['name']; }));
+  svg.append("g")
+      .call(d3.axisLeft(y))
 
     var colorScale = d3.scaleLinear()
       .domain([vis.locationData[49]['1hour_avg'],vis.locationData[0]['1hour_avg']])
       .range(["#a9cbdb", "#032738"])
 
-
-  svg.append("g")
-    .call(d3.axisLeft(y))
 
     svg.selectAll("myline")
       .data(vis.locationData)
@@ -75,23 +73,22 @@ console.log(vis.locationData);
         .attr("cx", x(0))
         // .attr("cx", function(d) { return x(d['1hour_avg']); })
         .attr("cy", function(d) { return y(d['name']); })
-        .attr("r", "4")
-        // .style("fill", "#69b3a2")
+        .attr("r", "5")
         .attr("fill", function(d) {
           return colorScale(d['1hour_avg']);
         })
         .attr("stroke", "black");
 
-      // Change the X coordinates of line and circle
+    //transitions
     svg.selectAll("circle")
       .transition()
       .duration(2000)
       .attr("cx", function(d) { return x(d['1hour_avg']); })
 
     svg.selectAll("line")
-    .transition()
-    .duration(2000)
-    .attr("x1", function(d) { return x(d['1hour_avg']); })
+      .transition()
+      .duration(2000)
+      .attr("x1", function(d) { return x(d['1hour_avg']); })
 
     //add hover on points to popup location and points
 
@@ -100,7 +97,7 @@ console.log(vis.locationData);
 
 }
 
-LollipopChart.prototype.updateVis = function() {
+LollipopDomesticChart.prototype.updateVis = function() {
   var vis = this;
 
 }
