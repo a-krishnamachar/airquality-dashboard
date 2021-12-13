@@ -4,7 +4,7 @@ function RadialChart (_parentElement, _data, _airData) {
   this.locationData = _data;
   this.airData = _airData;
   //this.data = vis.data;
-  console.log(this.locationData);
+  //console.log(this.locationData);
 
   this.initVis();
 }

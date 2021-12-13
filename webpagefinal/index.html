@@ -8,7 +8,37 @@
         <link rel="stylesheet" href="css/style.css">
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
     </head>
-    <body>
+    <body onload="document.body.style.opacity='1'">
+
+<div class="container">
+  <!-- Trigger the modal with a button -->
+  <button type="button" style="float: right; border: 1px solid white" class="btn btn-info btn-lg"
+    data-toggle="modal" data-target="#myModal">About</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">About</h4>
+        </div>
+
+        <div class="modal-body">
+          <p>Welcome to the map.</p>
+
+          <h4 class="modal-title">How to Use</h4>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
       <div id=jumpsection>
         Jump to a section: <br>
           <a id="jumpto-map" href="#map-title">Map</a> |
@@ -17,17 +47,16 @@
       </div>
         <br><br>
         <h1><center>Air Quality Dashboard</center></h1>
+        <br>
 
-
-
-        <h2 id="map-title"><center>Air Quality Map</center></h2>
-        <p>An interactive map displaying air quality indices across the world. Click and drag!</p>
-
+    <div id="map-overall-area">
+        <h2 id="map-title"><center>PM2.5 Map</center></h2>
+        <a href="#" data-toggle="map-tooltip"
+          title="An interactive map displaying air quality indices across the world. Click and drag!">What is this?</a>
+        <!-- <p>&nbsp An interactive map displaying air quality indices across the world. Click and drag!</p> -->
       <div id="map-area"></div>
+    </div>
 
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-          <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-          <br><br>
 
       <h2 id="lollipop-title"><center>"Hot Spots"</center></h2>
 
@@ -45,22 +74,23 @@
 
       </div>
 
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
       <div id="radial-chart">
 
         <h2 id="radial-title"><center>Worst AQI - Past 7 Days</center></h2>
       </div>
+
+      <footer>
+          <p>Aditya Krishnamachar | 2021</p>
+      </footer>
 
 
         <script src="https://d3js.org/d3.v6.js"></script>
         <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
 
 
-        <script src="js/jquery.min.js"></script>
+        <!-- <script src="js/jquery.min.js"></script> -->
       	<script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <!-- <script src="js/bootstrap.min.js"></script> -->
 
         <script src="js/main2.js"></script>
         <script src="js/map_new.js"></script>
@@ -69,7 +99,9 @@
         <script src="js/radial.js"></script>
 
         <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3-scale-radial.js"></script>
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     </body>
 </html>

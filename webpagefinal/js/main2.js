@@ -11,6 +11,9 @@ var height, width;
         d3.json("data/dataset_with10min.geojson").then(function(jsonData) {
           d3.csv("data/worstcurrentaqi.csv").then(function(mapData) {
             d3.csv("data/lastweekworst100.csv").then(function(radData) {
+              d3.csv("data/weeklyUSworst100.csv").then(function(usweeklyData) {
+                d3.csv("data/currentUSworst100.csv").then(function(uscurrentData) {
+
           //airdata is for the map!! geojson
           airData = jsonData;
           //visdata is for the chart, json
@@ -18,10 +21,14 @@ var height, width;
 
           //raddata is for radial data
           radialData = radData;
-          console.log(airData);
-          console.log(visData);
+          //console.log(airData);
+          //console.log(visData);
+
           visAreas(visData, airData);
-          visRadial(radialData, airData);
+          visRadial(radialData, usweeklyData);
+          visLollipop(visData, uscurrentData);
+                })
+              })
             })
           })
     });
@@ -29,11 +36,15 @@ var height, width;
     function visAreas(visData, airData) {
       map = new MapChart("map-area",visData, airData);
       lollipop = new LollipopChart("lollipop-area", visData, airData);
-      lollipop_domestic = new LollipopDomesticChart("lollipop-area-2", visData, airData);
+      // lollipop_domestic = new LollipopDomesticChart("lollipop-area-2", visData, airData);
       //radial = new RadialChart("radial-chart", visData, airData);
     }
-    function visRadial(radialData, airData) {
-      radial = new RadialChart("radial-chart", radialData, airData);
+    function visLollipop(visData, uscurrentData) {
+      lollipop_domestic = new LollipopDomesticChart("lollipop-area-2", visData, uscurrentData);
+
+    }
+    function visRadial(radialData, usweeklyData) {
+      radial = new RadialChart("radial-chart", radialData, usweeklyData);
     }
 
     //worst AQI past 7 days?

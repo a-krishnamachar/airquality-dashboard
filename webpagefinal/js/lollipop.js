@@ -4,7 +4,7 @@ function LollipopChart (_parentElement, _data, _airData) {
   this.locationData = _data;
   this.airData = _airData;
   //this.data = vis.data;
-  console.log(this.data);
+  //console.log(this.data);
 
   this.initVis();
 }
@@ -17,10 +17,10 @@ LollipopChart.prototype.initVis = function() {
 
   var margin = {top: 10, right: 30, bottom: 40, left: 100},
     width = 500 - margin.left - margin.right,
-    height = 700 - margin.top - margin.bottom;
+    height = 900 - margin.top - margin.bottom;
 
   var svg = d3.select("#lollipop-area").append("svg")
-    .attr("viewBox", '0 0 700 685')
+    .attr("viewBox", '0 0 630 900')
 
   // var svg = d3.select("#lollipop-area").append("svg")
   //     .attr("width", width + margin.left + margin.right)
@@ -85,12 +85,12 @@ console.log(vis.locationData);
       // Change the X coordinates of line and circle
     svg.selectAll("circle")
       .transition()
-      .duration(2000)
+      .duration(3000)
       .attr("cx", function(d) { return x(d['1hour_avg']); })
 
     svg.selectAll("line")
     .transition()
-    .duration(2000)
+    .duration(3000)
     .attr("x1", function(d) { return x(d['1hour_avg']); })
 
     //add hover on points to popup location and points

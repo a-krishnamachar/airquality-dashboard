@@ -36,15 +36,11 @@ MapChart.prototype.initVis = function() {
       source: 'purpleair',
       filter: ['has', 'point_count'],
       paint: {
-// Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-// with three steps to implement three types of circles:
-//   * Blue, 20px circles when point count is less than 100
-//   * Yellow, 30px circles when point count is between 100 and 750
-//   * Pink, 40px circles when point count is greater than or equal to 750
       'circle-color': [
         'step',
         ['get', 'point_count'],
-        '#51bbd6', 100, '#f1f075', 750, '#f28cb1'],
+        '#187ede', 100, '#a322bd', 750, '#510ec4'],
+        // 'red', 100, 'blue', 750, 'white'],
         'circle-radius': ['step', ['get', 'point_count'],
         20, 100, 30, 750, 40]}
       });
@@ -104,13 +100,13 @@ MapChart.prototype.initVis = function() {
 // the location of the feature, with
 // description HTML from its properties.
   map.on('click', 'unclustered-point', (e) => {
-const coordinates = e.features[0].geometry.coordinates.slice();
-console.log(e.features[0].properties);
-var pmname = "pm_2.5";
-var pm_now = e.features[0].properties[pmname];
-var hourname = "1hour_avg";
-var houravg = e.features[0].properties[hourname];
-var locationname = e.features[0].properties['name'];
+    const coordinates = e.features[0].geometry.coordinates.slice();
+    console.log(e.features[0].properties);
+    var pmname = "pm_2.5";
+    var pm_now = e.features[0].properties[pmname];
+    var hourname = "1hour_avg";
+    var houravg = e.features[0].properties[hourname];
+    var locationname = e.features[0].properties['name'];
 
 // Ensure that if the map is zoomed out such that
 // multiple copies of the feature are visible, the
