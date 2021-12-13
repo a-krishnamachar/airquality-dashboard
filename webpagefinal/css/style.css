@@ -1,11 +1,26 @@
+/*@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}*/
+
 body {
 	/*font-family: 'Georgia', serif;*/
   /*background-color: #dfe1e8;*/
-  background-color: lightgrey;
+  background-color: #edf0f0;
   margin: 10;
   padding: 10;
 	opacity: 0;
 	transition: opacity 4s;
+	/*background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;*/
 }
 h3 {
   font-family: 'Georgia', serif;
@@ -89,8 +104,8 @@ div#radialtooltip {
 	position: relative;
 	text-align: center;
 	width: 200px;
-	height: 60px;
-	left: 500px;
+	height: 110px;
+	left: 900px;
 	padding: 2px;
 	bottom: 900px;
 	font: 16px;

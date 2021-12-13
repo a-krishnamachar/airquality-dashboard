@@ -24,26 +24,26 @@ MapChart.prototype.initVis = function() {
     const coordinatesGeocoder = function (query) {
 // Match anything which looks like
 // decimal degrees coordinate pair.
-const matches = query.match(
-/^[ ]*(?:Lat: )?(-?\d+\.?\d*)[, ]+(?:Lng: )?(-?\d+\.?\d*)[ ]*$/i
-);
-if (!matches) {
-return null;
-}
+  const matches = query.match(
+    /^[ ]*(?:Lat: )?(-?\d+\.?\d*)[, ]+(?:Lng: )?(-?\d+\.?\d*)[ ]*$/i
+    );
+    if (!matches) {
+      return null;
+    }
 
 function coordinateFeature(lng, lat) {
-return {
-center: [lng, lat],
-geometry: {
-type: 'Point',
-coordinates: [lng, lat]
-},
-place_name: 'Lat: ' + lat + ' Lng: ' + lng,
-place_type: ['coordinate'],
-properties: {},
-type: 'Feature'
-};
-}
+  return {
+    center: [lng, lat],
+    geometry: {
+      type: 'Point',
+      coordinates: [lng, lat]
+    },
+    place_name: 'Lat: ' + lat + ' Lng: ' + lng,
+    place_type: ['coordinate'],
+    properties: {},
+    type: 'Feature'
+  };
+  }
 
 const coord1 = Number(matches[1]);
 const coord2 = Number(matches[2]);
@@ -74,7 +74,7 @@ new MapboxGeocoder({
 accessToken: mapboxgl.accessToken,
 localGeocoder: coordinatesGeocoder,
 zoom: 4,
-placeholder: 'Try: -40, 170',
+placeholder: 'Type name OR lat, long',
 mapboxgl: mapboxgl,
 reverseGeocode: true
 })

@@ -17,12 +17,10 @@ RadialChart.prototype.initVis = function() {
   var vis = this;
 
   var margin = {top: 100, right: 0, bottom: 0, left: 0},
-    width = 700 - margin.left - margin.right,
-    height = 700 - margin.top - margin.bottom,
+    width = 650 - margin.left - margin.right,
+    height = 650 - margin.top - margin.bottom,
     innerRadius = 90,
     outerRadius = Math.min(width, height)/2;
-
-
 
   var svg = d3.select("#radial-chart").append("svg")
     .attr("viewBox", '0 0 800 800')
@@ -77,6 +75,13 @@ RadialChart.prototype.initVis = function() {
           })
           .padAngle(0.02)
           .padRadius(innerRadius))
+        .on('click', function(d,i) {
+          //go to map area
+          //copy coordinates
+          var copyText = i['lat'] + ", " + i['lon'];
+          navigator.clipboard.writeText(copyText)
+          window.location.href="#map-overall-area"
+        })
         .on('mouseover', function(d,i) {
           console.log('hello')
           d3.select(this)
@@ -87,7 +92,9 @@ RadialChart.prototype.initVis = function() {
           radialpopup
               .html("7-day average AQI: " + i['1week_avg']
               + "<br/>" + "1-day avg: " + i['1day_avg']
-              + "<br/>" + "Coordinates: " + i['lat'] + ", " + i['lon']);
+              + "<br/>" + "Coordinates: " + i['lat'] + ", " + i['lon']
+              + "<br/> -------------"
+              + "<br/> CLICK to copy coordinates!");
         })
         .on("mouseout", function(d,i) {
           d3.select(this)
@@ -97,8 +104,6 @@ RadialChart.prototype.initVis = function() {
           radialpopup.transition().duration(500)
             .style("opacity", 0);
         });
-
-
 
 
     //location names

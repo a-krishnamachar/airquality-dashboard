@@ -5,21 +5,30 @@
         <meta name="description" content="">
         <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
         <title>Air Quality Dashboard</title>
-        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
         <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
 
     </head>
     <body onload="document.body.style.opacity='1'">
       <a name="top"></a>
+      <div id=jumpsection>
+        Jump to a section: <br>
+          <a id="jumpto-top" href="#top">Top</a> |
+          <a id="jumpto-map" href="#map-title">Map</a> |
+          <a id="jumpto-lollipop" href="#lollipop-title">Hot Spots</a> |
+          <a id="jumpto-radial" href="#radial-chart">Sustained Risk</a>
+      </div>
 
-<div class="container">
-  <!-- Trigger the modal with a button -->
+      <div class="container">
+
+
   <button type="button" style="float: right; border: 1px solid white" class="btn btn-info btn-lg"
     data-toggle="modal" data-target="#myModal">About</button>
 
-  <!-- Modal -->
+
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -55,13 +64,7 @@
   </div>
 </div>
 
-      <div id=jumpsection>
-        Jump to a section: <br>
-          <a id="jumpto-top" href="#top">Top</a> |
-          <a id="jumpto-map" href="#map-title">Map</a> |
-          <a id="jumpto-lollipop" href="#lollipop-title">Hot Spots</a> |
-          <a id="jumpto-radial" href="#radial-chart">Sustained Risk</a>
-      </div>
+
         <br><br>
         <h1><center>Air Quality Dashboard</center></h1>
         <br>
@@ -77,7 +80,7 @@
 
       <h2 id="lollipop-title"><center>"Hot Spots" | Current Highest PM2.5</center></h2>
       <a id="radialtool" style="padding: 10px;" href="#" data-toggle="tooltip" data-placement="right"
-        title="This section displays the highest PM2.5 concentrations both worldwide (left)
+        title="This section displays the current highest PM2.5 concentrations both worldwide (left)
         and in the domestic US (right). Hover over the dots for more information.">About this section</a>
 
       <div id="lollipop-overall" class="float-container">
@@ -93,13 +96,13 @@
         </div>
 
       </div>
-
+<br><br>
       <div id="radial-chart">
 
-        <h2 id="radial-title"><center>Worst AQI - Past 7 Days</center></h2>
+        <h2 id="radial-title"><center>Worst AQI - Past 7 Days</center></h2><br><br>
         <a href="#" data-toggle="tooltip"
           title="This chart displays the highest average sustained - over the past week -
-            particulate concentration worldwide. Hover over the bars for more.">Info</a>
+            PM2.5 worldwide. Hover over the bars for more.">Info</a>
 
       </div>
 
