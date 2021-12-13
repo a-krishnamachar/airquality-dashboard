@@ -20,7 +20,7 @@ LollipopDomesticChart.prototype.initVis = function() {
     height = 900 - margin.top - margin.bottom;
 
   var svg = d3.select("#lollipop-area-2").append("svg")
-    .attr("viewBox", '0 0 630 900')
+    .attr("viewBox", '0 0 600 900')
 
 // var svg = d3.select("#lollipop-area-2").append("svg")
 //     .attr("width", width + margin.left + margin.right)

@@ -38,6 +38,9 @@ var height, width;
       lollipop = new LollipopChart("lollipop-area", visData, airData);
       // lollipop_domestic = new LollipopDomesticChart("lollipop-area-2", visData, airData);
       //radial = new RadialChart("radial-chart", visData, airData);
+
+      misc();
+
     }
     function visLollipop(visData, uscurrentData) {
       lollipop_domestic = new LollipopDomesticChart("lollipop-area-2", visData, uscurrentData);
@@ -48,7 +51,14 @@ var height, width;
     }
 
     //worst AQI past 7 days?
+    function misc() {
+      $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+      });
 
+
+
+    }
 
 
 
