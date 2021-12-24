@@ -1,6 +1,13 @@
-Master's Capstone Project. An air quality dashboard
+##Master's Capstone Project
 
-Please view this webpage at https://a-krishnamachar.github.io/aqi-vis/webpagefinal/
+An air quality dashboard meant to show the air quality indices (AQI) around the world; and highlight the spots where AQI is the worst. 
+
+Hosted at:
+https://a-krishnamachar.github.io/airquality-dashboard/webpagefinal/
+
+
+Data taken from PurpleAir's open-source API.
+
 
 Webpages consulted:
 https://geoffboeing.com/2015/10/exporting-python-data-geojson/
