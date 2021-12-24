@@ -1,4 +1,4 @@
-##Master's Capstone Project
+# Master's Capstone Project
 
 An air quality dashboard meant to show the air quality indices (AQI) around the world; and highlight the spots where AQI is the worst. 
 
