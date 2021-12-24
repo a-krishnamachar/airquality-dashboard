@@ -1,4 +1,4 @@
-Master's Project | Aditya Krishnamachar
+Master's Capstone Project. An air quality dashboard
 
 Please view this webpage at https://a-krishnamachar.github.io/aqi-vis/webpagefinal/
 
